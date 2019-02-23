@@ -1,2 +1,4 @@
 .ipynb_checkpoints/
 helpers.py
+__pycache__/
+
