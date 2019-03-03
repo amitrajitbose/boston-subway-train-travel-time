@@ -65,7 +65,7 @@ class Judge(object):
             9 times out of 10.
         """
         # Find the 90th percentile lateness for each row
-        lateness = eval_set_df.quantile(q=.9, axis=1)
+        lateness = eval_set_df.quantile(q=0.9, axis=1)
 
         # Find the departure time that corresponds to a lateness of 0,
         # i.e., the one that gets us there on time 90% of the days.

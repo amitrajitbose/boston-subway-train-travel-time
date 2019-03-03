@@ -91,3 +91,101 @@ class DecisionTree(object):
                     print('Feature', current_node.split_feature, end=" ")
                     print('is not 0 or 1. Something is wrong.')
                 return None
+
+    def render(self):
+        """
+        Creates a plot that describes the tree
+        """
+        #create a figure
+        plt.figure(figsize=(18,8))
+        #plt.figure(34857)
+        #clear screen
+        plt.clf()
+        def plot_node(node, level, x):
+            """
+            Render the important information about a single node.
+
+            Parameters
+            ----------
+            node: TreeNode
+            level: int
+            x: float
+                The x position of the center of this node's info.
+            """
+            recommendation = node.recommendation
+            feature_name = self.feature_names[node.split_feature]
+            if node.is_leaf:
+                node_text = 'at: {rec}\n'.format(rec=recommendation)
+            else:
+                node_text = ''.join([
+                    'at: {rec}\n'.format(rec=recommendation),
+                    '{feature_name}?\n'.format(feature_name=feature_name),
+                    'no    yes'])
+            plt.text(
+                x, -level,
+                node_text,
+                horizontalalignment='center',
+                verticalalignment='center',
+            )
+            return
+
+        def plot_branches(level, x0, y_delta=.2):
+            """
+            Draw the branches between the current node and its children.
+
+            Parameters
+            ----------
+            level: int
+            x: float
+            y_delta: float
+                The amount of y-tail to be hidden.
+
+            Returns
+            -------
+            x_lo, x_hi: floats
+                The x positions of the low and high branch nodes.
+            """
+            y0 = -level
+            y3 = -level - 1
+            y1 = y0 - y_delta
+            y2 = y3 + y_delta
+
+            x3_lo = x0 - 2 ** y3
+            x3_hi = x0 + 2 ** y3
+            slope_lo = 1 / (x3_lo - x0)
+            slope_hi = 1 / (x3_hi - x0)
+            x_lo_delta = y_delta / slope_lo
+            x_hi_delta = y_delta / slope_hi
+            x1_lo = x0 + x_lo_delta
+            x1_hi = x0 + x_hi_delta
+            x2_lo = x3_lo - x_lo_delta
+            x2_hi = x3_hi - x_hi_delta
+
+            plt.plot([x1_lo, x2_lo], [y1, y2], color='black')
+            plt.plot([x1_hi, x2_hi], [y1, y2], color='black')
+
+            return x3_lo, x3_hi
+
+        def recurse(node, level, x):
+            """
+            Cycle through the tree in a depth-first manner.
+
+            Parameters
+            ----------
+            node: TreeNode
+            level: int
+            x: float
+            """
+            plot_node(node, level, x) #plot the node
+            if node.is_leaf:
+                return
+
+            x_lo, x_hi = plot_branches(level, x) #collect its children
+            recurse(node.lo_branch, level + 1, x_lo) #plot lower child first
+            recurse(node.hi_branch, level + 1, x_hi) #then higher child, i.e dfs
+            return
+
+        initial_level = 0
+        initial_x = 0
+        recurse(self.root, initial_level, initial_x)
+        plt.show()

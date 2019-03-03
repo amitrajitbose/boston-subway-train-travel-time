@@ -15,9 +15,9 @@ class TreeNode(object):
         parent: TreeNode
             None, for root node
         recommendation: float
-            The recommended departure time for days that fall in to this node.
+            The recommended departure time to leave home, for days that fall in this node.
         split_feature: int
-            The index of the feature on which this node's children are split.
+            The index of the feature on which this node's parent are split.
         """
         self.parent = parent
         self.hi_branch = None
@@ -29,9 +29,13 @@ class TreeNode(object):
 
     def attempt_split(self, data, err_fn, n_min):
         """
-        Try to split this node into two child nodes
-        Params
-        ------
+        Takes all the datapoints that correspond to this node.
+        A designated error function and the minimum number of training data points
+        allowed per leaf.
+        Try to split this node into two child nodes, decide whether and where to split.
+        
+        Parameters
+        ----------
         data: DataFrame, consisting of features for each of the data points
         err_fn: Function 
             Error function to determine fitness of a split. Choose a split
@@ -52,9 +56,9 @@ class TreeNode(object):
             self.features = [None]*n_features
         node_data = self.find_members(data)
 
-        feature_candidates = [i for i,j in enumerate(self.features) if (j is None)]
+        feature_candidates = [i for i,j in enumerate(self.features) if (j is None)] #hold the indices of the features that have not been split(or, j=None)
         best_feature = -1
-        best_split_score = 1e10 #this has to be minimised
+        best_split_score = 1e10 #this has to be minimised, this is the error
         best_hi_recommendation = self.recommendation
         best_lo_recommendation = self.recommendation
 
