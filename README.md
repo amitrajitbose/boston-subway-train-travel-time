@@ -13,7 +13,7 @@ git clone https://github.com/amitrajitbose/boston-subway-train-travel-time.git
 cd boston-subway-train-travel-time
 python3 departure_time.py <YYYY-MM-DD>
 ```
-**Note-1**: *Enter the required date in the format YYYY-MM-DD in the placeholder.*
+**Note-1**: *Enter the required date in the format YYYY-MM-DD in the placeholder.* <br>
 **Note-2**: *Please satisfy the requirements prior to running the app.*
 
 ##### Requirements
@@ -25,7 +25,7 @@ seaborn==0.9.0
 requests==2.21.0
 ```
 ##### Dataset
-The dataset has been collected from the [Massachussets Bay Transport Authority (MBTA)](https://www.mbta.com/) public data repository using the public license and API key. You can request for a private key [here](https://performance.mbta.com/portal).
+The dataset has been collected from the [Massachussets Bay Transport Authority (MBTA)](https://www.mbta.com/) public data repository using the public license and API key. You can request for a private key [here](https://performance.mbta.com/portal). <br>
 *[Massachusetts Department of Transportation Developers License Agreement](https://www.mass.gov/files/documents/2017/10/27/develop_license_agree_0.pdf)*
 
 ##### Model
@@ -37,11 +37,13 @@ The following distribution shows how our tested datapoints were mostly on time t
 ![performance-distribution](https://raw.githubusercontent.com/amitrajitbose/boston-subway-train-travel-time/master/assets/performance.png)
 
 We used mean error to evaluate the model. We also tried out other methods and here are the best models and reports for them.
+
 | Method | Best n-min | Best Tuning Score | Best Test Score |
-|:------:|:----------:|:-----------------:|:---------------:|
+| ------ | ---------- | ----------------- | --------------- |
 | Mean/Averaged Error | 10 | -5.53 | -3.87 |
 | Mean Absolute Error | 20 | 6.43 | 5.54 |
 | Root Mean Squared Error | 30 | 7.66 | 6.89 |
+
 The mean error had the best parameters, thus we used it in the final version of the model.
 ##### Acknowledgements
 Thanks to Brandon Rohrer for the support.
