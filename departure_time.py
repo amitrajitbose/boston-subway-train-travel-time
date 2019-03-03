@@ -500,7 +500,7 @@ if __name__ == '__main__':
     """
     os.environ['TZ'] = "US/Eastern"
     time.tzset()
-    recommendations = recommend(sys.argv[1:], verbose=False)
+    recommendations = recommend(sys.argv[1:], verbose=True)
     #recommendations = recommend(['2018-08-25','2018-08-26','2018-12-24'], verbose=False)
     print(recommendations)
 
