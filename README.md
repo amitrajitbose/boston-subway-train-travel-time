@@ -29,7 +29,7 @@ The dataset has been collected from the [Massachussets Bay Transport Authority (
 *[Massachusetts Department of Transportation Developers License Agreement](https://www.mass.gov/files/documents/2017/10/27/develop_license_agree_0.pdf)*
 
 ##### Model
-We've built a **decision tree classification** algorithm from **scratch** on **Python**, for the problem. We have dealt with multiple real world features like day of the week, season of the year, weekends, etc and other factors that impact the commute time. There can more complex hard-to-visualise features, which can be worked upon in future as an **advancement** to the project.
+We've built a **decision tree** algorithm from **scratch** on **Python**, for the problem. We have dealt with multiple real world features like day of the week, season of the year, weekends, etc and other factors that impact the commute time. There can more complex hard-to-visualise features, which can be worked upon in future as an **advancement** to the project.
 
 ##### Performance
 We divided the dataset we could collect into three partitions. First part was used for training the model, the second part was used to increase its performance by tuning a few hyperparamters like `n-min`, i.e. the minimum number of training examples in a leaf of the decision tree. This is also known as *stopping criterion*. In some problem, `max-depth` is used for the same purpose. Finally, on the third partition we tested our final model.
