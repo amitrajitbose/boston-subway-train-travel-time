@@ -44,9 +44,18 @@ We used mean error to evaluate the model. We also tried out other methods and he
 | Mean Absolute Error | 20 | 6.43 | 5.54 |
 | Root Mean Squared Error | 30 | 7.66 | 6.89 |
 
-The mean error had the best parameters, thus we used it in the final version of the model.
+The mean error had the best parameters, but we used Mean Absolute Error in the final version of the model. Explanation below by Brandon Rohrer.
+
+```
+When we're evaluating the model we want to know how good (or bad) it is. We compare the recommendations it makes to what we know the right answer should be. By choosing mean absolute error, we are saying that we don't care whether the recommendation is two minutes early or two minutes late, we just care that it's two minutes off.
+
+It is also a great insight that being late is worse than being early. That was part of the premise of the problem. However, we accounted for that already by targeting the 90th percentile arrival time as being on time, rather than the 50th percentile or the average.
+
+It's true that mean(deviation) will be zero if our model is perfect and all our deviations are zero. The trouble with that error function is that mean(deviation) will also be zero if half of our recommendations are an hour early and half are an hour late. They cancel each other out. mean(abs(deviation)) on the other hand will return a zero for a perfect model and 60 minutes for our pathologically bad one.
+```
+
 ##### Acknowledgements
-Thanks to Brandon Rohrer for the support.
+Thanks to [Brandon Rohrer](https://github.com/brohrer) for the support.
 
 ##### Contribution
 Feel free to improve the work and add a PR.

@@ -322,7 +322,7 @@ def evaluate(tree, arrivals_df, debug=False, debug_plot=False):
         plt.xlabel('Day Count')
         plt.ylabel('Minutes Late')
         plt.show()
-    return np.mean(deviation)
+    return np.mean(np.abs(deviation)) #REASON FOR USING MAE HAS BEEN DESCRIBED IN README
 
 '''
 
